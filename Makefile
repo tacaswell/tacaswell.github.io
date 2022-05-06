@@ -1,12 +1,13 @@
 PY?=python3
 PELICAN?=pelican
-PELICANOPTS=
+
 
 BASEDIR=$(CURDIR)
 INPUTDIR=$(BASEDIR)/content
 OUTPUTDIR=$(BASEDIR)/output
 CONFFILE=$(BASEDIR)/pelicanconf.py
 PUBLISHCONF=$(BASEDIR)/publishconf.py
+PELICANOPTS=-t $(BASEDIR)/themes/blue-penguin
 
 GITHUB_PAGES_BRANCH=main
 
