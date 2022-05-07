@@ -1,7 +1,7 @@
 AUTHOR = 'Thomas A Caswell'
 SITENAME = 'Casthoughts'
 SITEURL = ''
-
+SITESUBTITLE = 'Software and such'
 PATH = 'content'
 
 TIMEZONE = 'America/New_York'
