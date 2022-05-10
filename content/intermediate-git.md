@@ -44,19 +44,40 @@ This makes it possible to validate both each commit independently and the full
 repository history.
 
 Given such a graph, what operations would we want to do to it?  For example we
-may want to:
+want to
 
-2. label nodes
-1. compare source between nodes
-1. look at the whole tree
-1. look at a node
-1. add nodes
-3. discard changes
-3. change/move nodes
-3. share with your friends
+2. give commits human readable names
+1. compare source between commits
+1. look at the whole graph of commits
+1. look at a commit (both the code content and meta-data)
+1. add commits
+3. discard changes (both local changes and whole commits)
+3. change/move commits around the graph
+3. share your code (and history) with your friends
 
 
+In the standard fork-based development workflow we can think of there being 1
+canonical repository, for example for Matplotlib
+[matplotlib/matplotlib](https://github/matplotlib/matplotlib) is _the_ ground
+truth repository and only people with commit rights are able to push to that
+repository.  All of the development work by contributors is published to
+individual users forks, for example
+[tacaswell/matplotlib](https://github.cm/tacaswell/matplotlib), where only they
+are able to push commit.  This means that there are N+1 sets of public branches
+on GitHub; one from each contributor and one the canonical repository.  In
+addition, every local clone has its own set of branches.
 
+In general the development flow is from local branches, which are only visible
+on the file system they are checked out on and only moveable by the user the
+files belong to.  From there the branches are published to a public fork.  This
+means they can be seen by anyone, but only moved by user the fork belongs to.
+Finally the user can request that the committers to the canonical repository
+"pull" or "merge" their branch into the default branch.
+
+In this view when you are collectively working on code managed with git there
+is only one global graph which is the history.  Any given computer contains
+only a sub-graph of the global graph and each person participating in the
+development has a set of flags they can move around the graph.
 
 
 ## Label a commit
@@ -444,26 +465,6 @@ Be very careful about doing this to branches that other people are relying on.
 We recently had to [re-write the history on the default Matplotlib
 branch](https://discourse.matplotlib.org/t/default-branch-renamed-with-minor-edit-to-history/22367)
 and it required a fair amount of planning and work to manage.
-
-In the standard fork-based development workflow we can think of there being 1
-canonical repository, for example for Matplotlib
-[matplotlib/matplotlib](https://github/matplotlib/matplotlib) is _the_ ground
-truth repository and only people with commit rights are able to push to that
-repository.  All of the development work by contributors is published to
-individual users forks, for example
-[tacaswell/matplotlib](https://github.cm/tacaswell/matplotlib), where only they
-are able to push commit.  This means that there are N+1 sets of public branches
-on GitHub; one from each contributor and one the canonical repository.  In
-addition, every local clone has its own set of branches.
-
-In general the development flow is from local branches, which are only visible
-on the file system they are checked out on and only moveable by the user the
-files belong to.  From there the branches are published to a public fork.  This
-means they can be seen by anyone, but only moved by user the fork belongs to.
-Finally the user can request that the committers to the canonical repository
-"pull" or "merge" their branch into the default branch.
-
-
 
 
 
