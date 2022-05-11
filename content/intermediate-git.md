@@ -8,7 +8,7 @@ Authors: Thomas A Caswell
 Summary: Understanding how Git views the world for fun and profit
 
 This post assumes you have already accepted that you have to use `git` and know
-enough `git` incanttaions to get by day-to-day but now want to be able to
+enough `git` incantations to get by day-to-day but now want to be able to
 reason about what `git` is doing and why rather than just memorizing
 incantations.
 
@@ -34,7 +34,7 @@ copy when ever you commit.  Along with the code, `git` attaches to each a block
 of text, information about who and when the code was written and committed, what
 commits are the "parents", and a hash of all of that.  This hash serves both to
 validate the commit and as a globally unique name for the commit.  Because each
-commit knows its parents, the commits from a [directed asyclic
+commit knows its parents, the commits from a [directed acyclic
 graph](https://en.wikipedia.org/wiki/Directed_acyclic_graph) (DAG) with the The
 code snap-shots are the nodes, the parents define the edges, and it directed
 because you can only go backwards in history (commits do not know who their
@@ -84,7 +84,7 @@ development has a set of flags they can move around the graph.
 
 From the hash we have a globally unique identifier for each commit, however
 these hashes look something like:
-`6f8bc7c6f192f664a7ab2e4ff200d050bb2edc8f`. While unique and will suited from a
+`6f8bc7c6f192f664a7ab2e4ff200d050bb2edc8f`. While unique and well-suited from a
 computer, it is neither memorable nor does roll off the tongue.
 
 To give
