@@ -56,7 +56,7 @@ want to
 3. share your code (and history) with your friends
 
 
-In the standard fork-based development workflow we can think of there being 1
+In the standard fork-based development workflow we can think of there being one
 canonical repository, for example for Matplotlib
 [matplotlib/matplotlib](https://github/matplotlib/matplotlib) is _the_ ground
 truth repository and only people with commit rights are able to push to that
