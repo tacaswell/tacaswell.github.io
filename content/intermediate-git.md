@@ -109,7 +109,7 @@ incantations are:
 
 
 ```bash
-git branch            # list local branchs
+git branch            # list local branches
 git branch -c <name>  # create a branch
 git branch -d <name>  # delete a branch, if safe
 git branch -D <name>  # delete a branch over git's concerns
@@ -294,7 +294,7 @@ Alternatively if you want to discard the commits and the changes you can use
 the `--hard` flag:
 
 ```bash
-git reset --hard HEAD^      # move the branch back one, discard all changes
+git reset --hard HEAD^     # move the branch back one, discard all changes
 git reset --hard HEAD^^    # move the branch back two, discard all changes
 git reset --hard <a SHA1>  # move the branch a commit, discard all changes
 ```
@@ -370,8 +370,8 @@ If you want to have a commit from one branch to another `git cherry-pick`
 ```bash
 git cherry-pick <commit>      # pick the commit on to the current branch
 git cherry-pick -m 1 <commit> # pick a merge commit onto the current branch
-git cherry-pick --continue    # continue if you have to manually resolve confilcts
-git cherry-pick --skip        # drop a redundent commit
+git cherry-pick --continue    # continue if you have to manually resolve conflicts
+git cherry-pick --skip        # drop a redundant commit
 git cherry-pick --abort       # give up and go back to where you started
 ```
 
@@ -395,7 +395,7 @@ If there is an existing repository that you want to get locally to start working
 you can use the `git clone` [sub-command](https://git-scm.com/docs/git-clone):
 
 ```bash
-git clone url_to_remote    # will create a new direcotry in the CWD
+git clone url_to_remote    # will create a new directory in the CWD
 ```
 
 By default this will set up one "remote" pointing to where ever you cloned
