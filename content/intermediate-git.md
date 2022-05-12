@@ -7,9 +7,9 @@ Slug: think-like-git
 Authors: Thomas A Caswell
 Summary: Understanding how Git views the world for fun and profit
 
-This post assumes you have already accepted that you have to use `git` and know
-enough `git` incantations to get by day-to-day but now want to be able to
-reason about what `git` is doing and why rather than just memorizing
+This article is for people who already know how to use `git` day-to-day, but
+want a deeper understand of the _why_ of `git` to do a better job reasoning
+about what should or should not be possible rather than just memorizing
 incantations.
 
 While this text is going to (mostly) refer to the git CLI because it is the
@@ -33,51 +33,82 @@ At the core, `git` keeps track of many (many) copies of your code, creating a
 copy when ever you commit.  Along with the code, `git` attaches to each a block
 of text, information about who and when the code was written and committed, what
 commits are the "parents", and a hash of all of that.  This hash serves both to
-validate the commit and as a globally unique name for the commit.  Because each
-commit knows its parents, the commits from a [directed acyclic
-graph](https://en.wikipedia.org/wiki/Directed_acyclic_graph) (DAG) with the The
-code snap-shots are the nodes, the parents define the edges, and it directed
+validate the commit and as a globally unique name for the commit.
+
+Because each commit knows its parent(s), the commits from a [directed acyclic
+graph](https://en.wikipedia.org/wiki/Directed_acyclic_graph) (DAG).  The code
+snap-shots and metadata are the nodes, the parents define the edges, and
 because you can only go backwards in history (commits do not know who their
-children are).  The hash includes information about the parents, thus the tree
-is variation on a [Merkle Tree](https://en.wikipedia.org/wiki/Merkle_tree).
-This makes it possible to validate both each commit independently and the full
-repository history.
+children are) it is directed.  DAG's are a a relatively common data structure
+in programming (and if you need to work with them in Python checkout
+[networkx](http://networkx.org/documentation/stable/)) by identifying that one
+underlies one of `git`'s core data structures we can start to develop intuition
+of what will be easy on `git` history (if they would be easy to express via
+operations on a DAG).
+
+Incidentally, The hash includes information about the parents, thus the tree is
+variation on a [Merkle Tree](https://en.wikipedia.org/wiki/Merkle_tree).  Using
+these hashes you can validate that a `git` repository is self consistent and
+that the source you have checked out is indeed the source that was checked in.
+Additionally, this means if you and a collaborator both have a clone of a
+shared project then they can send you the hash of a commit and you can be sure
+that you have both an identical working tree and identical history.
 
 Given such a graph, what operations would we want to do to it?  For example we
 want to
 
-2. give commits human readable names
-1. compare source between commits
-1. look at the whole graph of commits
-1. look at a commit (both the code content and meta-data)
-1. add commits
-3. discard changes (both local changes and whole commits)
-3. change/move commits around the graph
-3. share your code (and history) with your friends
+2. give commits human readable names (`git tag`, `git branch`)
+1. compare source between commits (`git diff`)
+1. look at the whole graph of commits (`gitk`, `git log`)
+1. look at a commit (both the code content and meta-data) (`gitk`, `git switch`, `git checkout`)
+1. add commits (`git stage`, `git add`)
+3. discard changes (both local changes and whole commits) (`git reset`, `git checkout`, `git clean`)
+3. change/move commits around the graph (`git rebase`, `git cherry-pick`)
+3. share your code (and history) with your friends (`git push`, `git fetch`, `git remote`, `git merge`)
 
+## What does in mean to be distributed (but centralized)?
 
-In the standard fork-based development workflow we can think of there being one
-canonical repository, for example for Matplotlib
+From a technical stand point no clone of a `git` repository is more special
+than any other.  Each contains a self consistent section of the history of the
+repository and can share that information with each other.  From a certain
+point of view, there is only one global history which consists of every commit
+any developer on any computer has ever created and any given computer only ever
+has a sub-graph of the full history.
+
+While technically pure, fully distributed collaboration is deeply impractical.
+Almost every project has socially picked a central repository to be considered
+the "cannonical" repository.  For example for Matplotlib
 [matplotlib/matplotlib](https://github/matplotlib/matplotlib) is _the_ ground
-truth repository and only people with commit rights are able to push to that
-repository.  All of the development work by contributors is published to
-individual users forks, for example
-[tacaswell/matplotlib](https://github.cm/tacaswell/matplotlib), where only they
-are able to push commit.  This means that there are N+1 sets of public branches
-on GitHub; one from each contributor and one the canonical repository.  In
-addition, every local clone has its own set of branches.
+truth repository.  At the end of the day what _is_ Matplotlib the library is
+that git history.  Because of the special social role that repository holds
+only people with commit rights are able to push to that repository.  When
+people talk about project having a "hard fork" or a "hostile fork" they are
+referring to a community that has split about which repository is "the one" and
+who has the ability to push to it.
 
-In general the development flow is from local branches, which are only visible
-on the file system they are checked out on and only moveable by the user the
-files belong to.  From there the branches are published to a public fork.  This
-means they can be seen by anyone, but only moved by user the fork belongs to.
-Finally the user can request that the committers to the canonical repository
-"pull" or "merge" their branch into the default branch.
+Similarly, every commit has a (gloablly) unique name: its hash.  The branch and
+tag names that we use are for the humans and any meaning we attach to the names
+is purely social.  Within the canonical repository there is a particular
+branches which are identified as _the_ branches.  For example on Matplotlib we
+have `main` branch for new development and the `vX.Y.x` branches which are the
+maintence branches for each `vX.Y.0` minor release..  To `git` these names are
+meaningless, but socially they are critical.
 
-In this view when you are collectively working on code managed with git there
-is only one global graph which is the history.  Any given computer contains
-only a sub-graph of the global graph and each person participating in the
-development has a set of flags they can move around the graph.
+
+In the standard fork-based development workflow that many open source software
+projects use the commits move from less visible but loosely controlled parts of
+the global graphs to more public and controlled parts.  For example anyone can
+create commits on their local clone at will!  However no one else can (easily)
+see them and those commits are inaccessible to almost everyone else who has
+part of the total graph.  A developer can then choose to publish their commits
+to a public location (for example I push all of my work on Matplotlib to
+[tacaswell/matplotlib](https://github.cm/tacaswell/matplotlib) first).  Once
+the commits are public anyone can see them, only a handful of people are likely
+to actually access them.  To get the code into the canonical repository, and
+hence used by everyone, the user can request that the committers to the
+canonical repository "pull" or "merge" their branch into the default branch.  If
+this "pull request" is accepted and merged the default branch then that code
+is forever part of the projects history.
 
 
 ## Label a commit
@@ -510,5 +541,21 @@ starting with these settings:
 
 ## Other resources
 
-- [recovering from git mistakes](https://ohshitgit.com/) ([worksafe version](https://dangitgit.com/en))
-- [the Git Parable](https://tom.preston-werner.com/2009/05/19/the-git-parable.html)
+- [recovering from git mistakes](https://ohshitgit.com/) ([worksafe
+  version](https://dangitgit.com/en)): A humorous (and vulgar) guide to
+  recovering when things go wrong.
+- [the Git
+  Parable](https://tom.preston-werner.com/2009/05/19/the-git-parable.html): A
+  just-so story that takes you from making backups by hand to agreeing with
+  some of the more mystifying choices git makes.
+- [Anything Raymond
+  Chen](https://devblogs.microsoft.com/search?query=git&blog=%2Foldnewthing%2F)
+  has written about git.  Some of these are just mind bending, like [Mundane
+  git commit-tree trick, Part 5: Squashing without git
+  rebase](https://devblogs.microsoft.com/oldnewthing/20190510-00/?p=102488)
+
+
+## Acknowledgments
+
+Thank you to James Powell and Dora Caswell who read (or listened to) early
+drafts of this post and provided valuable feedback.
