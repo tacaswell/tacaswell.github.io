@@ -8,7 +8,7 @@ Authors: Thomas A Caswell
 Summary: Understanding how Git views the world for fun and profit
 
 This post assumes you have already accepted that you have to use `git` and know
-enough `git` incanttaions to get by day-to-day but now want to be able to
+enough `git` incantations to get by day-to-day but now want to be able to
 reason about what `git` is doing and why rather than just memorizing
 incantations.
 
@@ -34,7 +34,7 @@ copy when ever you commit.  Along with the code, `git` attaches to each a block
 of text, information about who and when the code was written and committed, what
 commits are the "parents", and a hash of all of that.  This hash serves both to
 validate the commit and as a globally unique name for the commit.  Because each
-commit knows its parents, the commits from a [directed asyclic
+commit knows its parents, the commits from a [directed acyclic
 graph](https://en.wikipedia.org/wiki/Directed_acyclic_graph) (DAG) with the The
 code snap-shots are the nodes, the parents define the edges, and it directed
 because you can only go backwards in history (commits do not know who their
@@ -56,7 +56,7 @@ want to
 3. share your code (and history) with your friends
 
 
-In the standard fork-based development workflow we can think of there being 1
+In the standard fork-based development workflow we can think of there being one
 canonical repository, for example for Matplotlib
 [matplotlib/matplotlib](https://github/matplotlib/matplotlib) is _the_ ground
 truth repository and only people with commit rights are able to push to that
@@ -84,7 +84,7 @@ development has a set of flags they can move around the graph.
 
 From the hash we have a globally unique identifier for each commit, however
 these hashes look something like:
-`6f8bc7c6f192f664a7ab2e4ff200d050bb2edc8f`. While unique and will suited from a
+`6f8bc7c6f192f664a7ab2e4ff200d050bb2edc8f`. While unique and well-suited from a
 computer, it is neither memorable nor does roll off the tongue.
 
 To give
@@ -109,7 +109,7 @@ incantations are:
 
 
 ```bash
-git branch            # list local branchs
+git branch            # list local branches
 git branch -c <name>  # create a branch
 git branch -d <name>  # delete a branch, if safe
 git branch -D <name>  # delete a branch over git's concerns
@@ -294,7 +294,7 @@ Alternatively if you want to discard the commits and the changes you can use
 the `--hard` flag:
 
 ```bash
-git reset --hard HEAD^      # move the branch back one, discard all changes
+git reset --hard HEAD^     # move the branch back one, discard all changes
 git reset --hard HEAD^^    # move the branch back two, discard all changes
 git reset --hard <a SHA1>  # move the branch a commit, discard all changes
 ```
@@ -370,8 +370,8 @@ If you want to have a commit from one branch to another `git cherry-pick`
 ```bash
 git cherry-pick <commit>      # pick the commit on to the current branch
 git cherry-pick -m 1 <commit> # pick a merge commit onto the current branch
-git cherry-pick --continue    # continue if you have to manually resolve confilcts
-git cherry-pick --skip        # drop a redundent commit
+git cherry-pick --continue    # continue if you have to manually resolve conflicts
+git cherry-pick --skip        # drop a redundant commit
 git cherry-pick --abort       # give up and go back to where you started
 ```
 
@@ -395,7 +395,7 @@ If there is an existing repository that you want to get locally to start working
 you can use the `git clone` [sub-command](https://git-scm.com/docs/git-clone):
 
 ```bash
-git clone url_to_remote    # will create a new direcotry in the CWD
+git clone url_to_remote    # will create a new directory in the CWD
 ```
 
 By default this will set up one "remote" pointing to where ever you cloned
