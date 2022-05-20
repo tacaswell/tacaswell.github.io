@@ -13,50 +13,69 @@ about what should or should not be possible rather than just memorizing
 incantations.
 
 While this text is going to (mostly) refer to the git CLI because it is the
-lowest common denominator (everyone who uses git has access to the CLI!), but
-there are many richer interface (I personally use [magit](https://magit.vc/)
-and [gitk](https://git-scm.com/docs/gitk/) in my day-to-day work).  For each of
-the CLI interfaces I'm highlighting I am only covering the aspect of them that
-I use day-to-day.  Many of these CLIs can do more (and sometimes wildly
-different!) things, see the links back to the documentation for the full details.
+lowest common denominator (everyone who uses git has access to the CLI!), there
+are many richer graphical user interfaces available (likely built into your
+IDE).  There is nothing wrong with using a GUI for working with `git` nor is
+the CLI "morally superior" -- anyone who says otherwise is engaging in
+gatekeeping nonsense.  I personally use [magit](https://magit.vc/) and
+[gitk](https://git-scm.com/docs/gitk/) in my day-to-day work.  [Real
+programers](https://xkcd.com/378/) use tools that make them effective, if a GUI
+makes your life easier use it!  For each of the CLI interfaces I'm highlighting
+I am only covering the functionality relevant to the point I'm making.  Many of
+these CLIs can do more (and sometimes wildly different!) things, see the links
+back to the documentation for the full details.
+
+This article is focused on the history aspect of `git`.  I will only touch in
+passing on the fact that `git` uses [content based
+addressing](https://git-scm.com/book/en/v2/Git-Internals-Git-Objects) and how
+it actually encodes the state of the repository at each commit.  These details
+are interesting in their own right and critical to the implementation of `git`
+being efficient (both time and space wise), but are out of scope for this
+article.
 
 Another article in a similar vein to this, but starting from the usage point of
-view, is [the Git Parable
+view and build up is [the Git Parable
 ](https://tom.preston-werner.com/2009/05/19/the-git-parable.html).  When I read
-many this essay years ago it made `git` "click" for me.
+this essay years ago it made `git` "click" for me.  If you have not read it, I
+suggest you go read it instead of this!
+
+**Table of Contents**
 
 [TOC]
 
 ## git's view of the world
 
 At the core, `git` keeps track of many (many) copies of your code, creating a
-copy when ever you commit.  Along with the code, `git` attaches to each a block
+snapshot whenever you commit.  Along with the code, `git` attaches to each a block
 of text, information about who and when the code was written and committed, what
 commits are the "parents", and a hash of all of that.  This hash serves both to
 validate the commit and as a globally unique name for the commit.
 
-Because each commit knows its parent(s), the commits from a [directed acyclic
+Because each commit knows its parent(s), the commits form a [directed acyclic
 graph](https://en.wikipedia.org/wiki/Directed_acyclic_graph) (DAG).  The code
 snap-shots and metadata are the nodes, the parents define the edges, and
 because you can only go backwards in history (commits do not know who their
 children are) it is directed.  DAG's are a a relatively common data structure
 in programming (and if you need to work with them in Python checkout
-[networkx](http://networkx.org/documentation/stable/)) by identifying that one
-underlies one of `git`'s core data structures we can start to develop intuition
-of what will be easy on `git` history (if they would be easy to express via
-operations on a DAG).
+[networkx](http://networkx.org/documentation/stable/)) by identifying that a
+DAG is the core data structure of `git`'s view of history we can start to
+develop intuition of what will be easy on `git` history (if they would be easy
+to express via operations on a DAG).  Using this intuition, we can (hopefully)
+start to guess how `git` would probably implement some functionality we need to
+get done!
 
-Incidentally, The hash includes information about the parents, thus the tree is
+Incidentally, the hash includes information about the parents, thus the tree is
 variation on a [Merkle Tree](https://en.wikipedia.org/wiki/Merkle_tree).  Using
 these hashes you can validate that a `git` repository is self consistent and
 that the source you have checked out is indeed the source that was checked in.
-Additionally, this means if you and a collaborator both have a clone of a
-shared project then they can send you the hash of a commit and you can be sure
-that you have both an identical working tree and identical history.
+If you and a collaborator both have a clone of a shared project then they can
+send you just the hash of a commit and you can be sure that you have both an
+identical working tree and identical history.
 
 Given such a graph, what operations would we want to do to it?  For example we
 want to
 
+1. get a repository to work with (`git clone`, `git init`)
 2. give commits human readable names (`git tag`, `git branch`)
 1. compare source between commits (`git diff`)
 1. look at the whole graph of commits (`gitk`, `git log`)
@@ -65,6 +84,7 @@ want to
 3. discard changes (both local changes and whole commits) (`git reset`, `git checkout`, `git clean`)
 3. change/move commits around the graph (`git rebase`, `git cherry-pick`)
 3. share your code (and history) with your friends (`git push`, `git fetch`, `git remote`, `git merge`)
+
 
 ## What does in mean to be distributed (but centralized)?
 
@@ -109,6 +129,16 @@ hence used by everyone, the user can request that the committers to the
 canonical repository "pull" or "merge" their branch into the default branch.  If
 this "pull request" is accepted and merged the default branch then that code
 is forever part of the projects history.
+
+## Get the history
+
+
+If there is an existing repository that you want to get locally to start working on
+you can use the `git clone` [sub-command](https://git-scm.com/docs/git-clone):
+
+```bash
+git clone url_to_remote    # will create a new directory in the CWD
+```
 
 
 ## Label a commit
@@ -159,6 +189,10 @@ git tag -a <name> # create a new tag
 ```
 
 You should always create "annotated" tags.
+
+In `git` jargon these are "refs".  See [the
+docs](https://git-scm.com/book/en/v2/Git-Internals-Git-References) if you want
+even more details about how `git` encodes these.
 
 ## Compare source between nodes
 
@@ -413,24 +447,22 @@ be useful if things do not go as you expect!
 ## Sharing with your friends
 
 So far we have not talked about any of the collaborative or distributed nature
-of git!  While version control is useful if you are working alone (again, your
-most frequent collaborator is your future / past self), it really shines when
-you are working with other people.
+of git!  Except for `git clone`, every command we have talked about so far can
+be done only with information than `git` has on your computer and can be done
+without a network connection.  This lets you work in your own private enclave,
+either temporarily, because you are working on a laptop on commuter rail or are
+not yet ready to share your work, or permanently if you just prefer to work
+alone.
 
-To share code with others we need to a notion of a shared history.  Given that
-under the hood git is a graph of nodes uniquely named by their content "all" we
-have to do is be able to share information about the commits, branches, and
-tags between the different computers!
+While version control is useful if you are working alone (again, your most
+frequent collaborator is your future / past self), it really shines when you
+are working with other people. To share code with others we need to a notion of
+a shared history.  Given that under the hood git is a graph of nodes uniquely
+named by their content "all" we have to do is be able to share information
+about the commits, branches, and tags between the different computers!
 
-If there is an existing repository that you want to get locally to start working on
-you can use the `git clone` [sub-command](https://git-scm.com/docs/git-clone):
-
-```bash
-git clone url_to_remote    # will create a new directory in the CWD
-```
-
-By default this will set up one "remote" pointing to where ever you cloned
-from.  To rename or change the url of this remote and add new remotes use the
+By default after an initial `git clone` there is one "remote" pointing to where
+ever you cloned from.  To modify an existing remote or add a new remote use the
 `git remote` [sub-command](https://git-scm.com/docs/git-remote).
 
 ```bash
@@ -529,14 +561,17 @@ starting with these settings:
 
 ## Other things you might want to do
 
-- track the history of a line of code back in time
-- remove untracked and ignored files
-- find the commit that broke something
-- merge un-related git histories into one
-- extract the history of a sub-directory into its own repository
-- purge a particular file (or change) from the history
-- set up multiple worktrees
-- make a new repo
+- track the history of a line of code back in time (`gitk`, `git blame` + UI tooling, `git log`)
+- find the commit that broke something (`git bisect`)
+- merge un-related git histories into one (`git merge --allow-unrelated-histories`)
+- extract the history of a sub-directory into its own repository (`git filter-branch`)
+- purge a particular file (or change) from the history (`git filter-branch` or
+  [BFG repo-cleaner](https://rtyley.github.io/bfg-repo-cleaner/))
+- set up multiple worktrees (`git worktree`)
+- make a new repo (`git init`)
+- fast searching (`git grep`)
+- ask `git` to clean up after itself (`git gc`)
+
 
 
 ## Other resources
@@ -553,6 +588,8 @@ starting with these settings:
   has written about git.  Some of these are just mind bending, like [Mundane
   git commit-tree trick, Part 5: Squashing without git
   rebase](https://devblogs.microsoft.com/oldnewthing/20190510-00/?p=102488)
+- Git internals [straight from the horse's
+  mouth](https://git-scm.com/book/en/v2/Git-Internals-Plumbing-and-Porcelain).
 
 
 ## Acknowledgments
