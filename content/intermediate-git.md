@@ -130,11 +130,17 @@ canonical repository "pull" or "merge" their branch into the default branch.  If
 this "pull request" is accepted and merged the default branch then that code
 is forever part of the projects history.
 
-## Get the history
+## Get a graph to work with
 
+The most common way to get a copy of a project history is not to start fresh,
+but to get a copy of a preexisting history.  Any given project only starts
+once, but over time will receive many more commits (this repository already has
+20+ commits, Matplotlib has over 43k, the kernel has [over 1
+million](https://www.linuxfoundation.org/blog/the-one-millionth-commit-the-search-for-the-lucky-linux-kernel-contributor/)).
 
-If there is an existing repository that you want to get locally to start working on
-you can use the `git clone` [sub-command](https://git-scm.com/docs/git-clone):
+If there is an existing repository that you want to get locally to start
+working on you can use the `git clone`
+[sub-command](https://git-scm.com/docs/git-clone):
 
 ```bash
 git clone url_to_remote    # will create a new directory in the CWD
@@ -144,9 +150,12 @@ git clone url_to_remote    # will create a new directory in the CWD
 ## Label a commit
 
 From the hash we have a globally unique identifier for each commit, however
-these hashes look something like:
-`6f8bc7c6f192f664a7ab2e4ff200d050bb2edc8f`. While unique and well-suited from a
-computer, it is neither memorable nor does roll off the tongue.
+these hashes look something like: `6f8bc7c6f192f664a7ab2e4ff200d050bb2edc8f`.
+While unique(ish) and well-suited from a computer, it is neither memorable nor
+does roll off the tongue.  Anyplace that `git` takes a SHA it will also take a
+prefix, however the number of characters needed to be unique [depends on the
+size of the
+repository](https://blog.cuviper.com/2013/11/10/how-short-can-git-abbreviate/).
 
 To give
 human-friendly name to commits git offers two flavors of labels: **branches**
