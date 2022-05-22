@@ -65,7 +65,7 @@ start to guess how `git` would probably implement some functionality we need to
 get done!
 
 Incidentally, the hash includes information about the parents, thus the tree is
-variation on a [Merkle Tree](https://en.wikipedia.org/wiki/Merkle_tree).  Using
+a variation on a [Merkle Tree](https://en.wikipedia.org/wiki/Merkle_tree).  Using
 these hashes you can validate that a `git` repository is self consistent and
 that the source you have checked out is indeed the source that was checked in.
 If you and a collaborator both have a clone of a shared project then they can
@@ -84,7 +84,7 @@ want to
 3. discard changes (both local changes and whole commits) (`git reset`, `git checkout`, `git clean`)
 3. change/move commits around the graph (`git rebase`, `git cherry-pick`)
 3. share your code (and history) with your friends (`git push`, `git fetch`, `git remote`, `git merge`)
-
+1. have more than one commit checked out at a time (`git worktree`)
 
 ## What does in mean to be distributed (but centralized)?
 
@@ -102,17 +102,20 @@ the "cannonical" repository.  For example for Matplotlib
 truth repository.  At the end of the day what _is_ Matplotlib the library is
 that git history.  Because of the special social role that repository holds
 only people with commit rights are able to push to that repository.  When
-people talk about project having a "hard fork" or a "hostile fork" they are
+people talk about a project having a "hard fork" or a "hostile fork" they are
 referring to a community that has split about which repository is "the one" and
 who has the ability to push to it.
 
 Similarly, every commit has a (gloablly) unique name: its hash.  The branch and
 tag names that we use are for the humans and any meaning we attach to the names
-is purely social.  Within the canonical repository there is a particular
-branches which are identified as _the_ branches.  For example on Matplotlib we
-have `main` branch for new development and the `vX.Y.x` branches which are the
-maintence branches for each `vX.Y.0` minor release..  To `git` these names are
-meaningless, but socially they are critical.
+is purely social.  Within the canonical repository there is a particular branch
+which is identified as _the_ branch for new development along and optionally a
+handful of other "official" branches for maintaining bug-fix series. The exact
+details of the names, the life cycles and the development workflow will vary
+from team-to-team.  For example on Matplotlib we have a `main` branch for new
+development, the `vX.Y.x` branches which are the maintenance branches for each
+`vX.Y.0` minor release, and `vX.Y-doc` for the version specific documentation.
+To `git` these names are meaningless, but socially they are critical.
 
 
 In the standard fork-based development workflow that many open source software
@@ -146,12 +149,27 @@ working on you can use the `git clone`
 git clone url_to_remote    # will create a new directory in the CWD
 ```
 
+By default `git` will fetch everything from the remote repository (there are
+ways [to reduces this for big
+repositories](https://github.blog/2020-12-21-get-up-to-speed-with-partial-clone-and-shallow-clone/)).
+If you clone from the canonical repository then you have the complete
+up-to-date official history of the project on your computer!
+
+If you need to create a new repository use the `git
+init`[sub-command](https://git-scm.com/docs/git-init):
+
+```bash
+git init
+```
+
+However, I have probably only ever used `git init` a few dozen times in my
+career, where as I use `git clone` a few dozen times a week.
 
 ## Label a commit
 
 From the hash we have a globally unique identifier for each commit, however
 these hashes look something like: `6f8bc7c6f192f664a7ab2e4ff200d050bb2edc8f`.
-While unique(ish) and well-suited from a computer, it is neither memorable nor
+While unique(ish) and well-suited for a computer, it is neither memorable nor
 does roll off the tongue.  Anyplace that `git` takes a SHA it will also take a
 prefix, however the number of characters needed to be unique [depends on the
 size of the
@@ -160,7 +178,7 @@ repository](https://blog.cuviper.com/2013/11/10/how-short-can-git-abbreviate/).
 To give
 human-friendly name to commits git offers two flavors of labels: **branches**
 and **tags**.  The conceptual difference is that a **branch** is expected to
-move between commits over time and **tags** are fixed to a particular branch
+move between commits over time and **tags** are fixed to a particular commit
 for all time.
 
 
@@ -254,7 +272,7 @@ changes.
 When working with a git repository on your computer you almost always have one
 of the commits materialized into a working tree (or more than one with the `git
 worktree` [sub-command](https://git-scm.com/docs/git-worktree)).  The working
-tree is, as the same suggests, where you actually do your work!  We will come
+tree is, as the name suggests, where you actually do your work!  We will come
 back to this in the next section.
 
 To checkout a particular **commit** (or **tag** or **branch**) you can use the
@@ -303,8 +321,9 @@ changes are staged. `git diff`, when called with no arguments will show the deta
 diff between the current working tree and `HEAD`.
 
 As you work on your code, `git` does not require you to commit all of your
-changes at once, but to enable this committing is two stage process.  The first step is to use
-the `git add` [sub-command](https://git-scm.com/docs/git-add) to stage changes
+changes at once, but to enable this committing is two a stage process.  The
+first step is to use the `git add`
+[sub-command](https://git-scm.com/docs/git-add) to stage changes
 
 ```bash
 git add path/to/file  # to stage all the changes in a file
@@ -331,7 +350,7 @@ As `git` encourages the creation of **branches** for new development, when the
 work is done (via the cycle above) we will need to merge this work back into
 the canonical branch which is done via the `git merge`
 [sub-command](https://git-scm.com/docs/git-merge).  By default, this will
-create a new commit on your current branch who's has two parents (the tips of
+create a new commit on your current branch who has two parents (the tips of
 each branch involved).
 
 ```bash
@@ -390,7 +409,7 @@ can use these tools to purge it.
 ## change or move nodes
 
 Due to the way the hashes work in `git` you can not truly _change_ a commit,
-but you can modify and recommit it or make copies else where in the graph.
+but you can modify and recommit it or make copies elsewhere in the graph.
 Remember that if you have already shared the commits you are replacing you will
 have to force-push them again.  Be very careful about doing this to any branch
 that many other people are using.
@@ -512,7 +531,10 @@ git push                              # "do the right thing" with upstream set
 ```
 
 Given that in a typical workflow you are likely to be pushing to the same
-branch on the same remote many times.  By telling git about this association we
+branch on the same remote many times `git` has streamlined ways of keeping track
+of the association between your local branch and a [remote
+branch](https://git-scm.com/book/en/v2/Git-Branching-Remote-Branches) on a
+(presumably) more public location.  By telling git about this association we
 save both typing and the chance of mistakes due to typos.
 
 If you try to push commits to a remote branch that has commits that are not on
@@ -588,6 +610,7 @@ starting with these settings:
 - [recovering from git mistakes](https://ohshitgit.com/) ([worksafe
   version](https://dangitgit.com/en)): A humorous (and vulgar) guide to
   recovering when things go wrong.
+- [Julia Evans on git](https://jvns.ca/blog/2018/10/27/new-zine--oh-shit--git-/)
 - [the Git
   Parable](https://tom.preston-werner.com/2009/05/19/the-git-parable.html): A
   just-so story that takes you from making backups by hand to agreeing with
@@ -599,9 +622,10 @@ starting with these settings:
   rebase](https://devblogs.microsoft.com/oldnewthing/20190510-00/?p=102488)
 - Git internals [straight from the horse's
   mouth](https://git-scm.com/book/en/v2/Git-Internals-Plumbing-and-Porcelain).
-
+- [Commits are snapshots not diffs](https://github.blog/2020-12-17-commits-are-snapshots-not-diffs/)
 
 ## Acknowledgments
 
-Thank you to James Powell and Dora Caswell who read (or listened to) early
-drafts of this post and provided valuable feedback.
+Thank you to James Powell, Alex Held, Dora Caswell and the other beta-readers
+who read (or listened to) early drafts of this post and provided valuable
+feedback.
