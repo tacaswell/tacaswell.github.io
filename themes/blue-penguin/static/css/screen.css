@@ -72,7 +72,7 @@ header, #wrapper {
 
 a {
     text-decoration: none;
-    color: #15A9DB;
+    color: #0526b5;
 }
 
 ul {
@@ -248,7 +248,7 @@ nav a:hover {
     background-color: #d3d3d3;
 }
 nav li.selected a {
-    background-color: #15A9DB;
+    background-color: #0526b5;
     color: #FFF;
 }
 
@@ -342,5 +342,5 @@ footer p { margin: 0; }
     font-size: 1.2em;
     line-height: 1.6em;
     padding-left: 1em;
-    border-left: #15A9DB solid 4px;
+    border-left: #0526b5 solid 4px;
 }
