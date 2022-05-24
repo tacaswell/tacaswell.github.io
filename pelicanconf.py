@@ -2,6 +2,7 @@ AUTHOR = 'Thomas A Caswell'
 SITENAME = 'Casthoughts'
 SITEURL = ''
 SITESUBTITLE = 'Software and such'
+SITEDESCRIPTION = "Blog of Thomas A Caswell"
 PATH = 'content'
 
 TIMEZONE = 'America/New_York'
