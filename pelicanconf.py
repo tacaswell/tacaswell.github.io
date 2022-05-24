@@ -87,4 +87,6 @@ MARKDOWN = {
 }
 
 STATIC_PATHS = ['images', 'extra']
-EXTRA_PATH_METADATA = {'extra/favicon.ico': {'path': 'favicon.ico'}, }
+EXTRA_PATH_METADATA = {'extra/favicon.ico': {'path': 'favicon.ico'},
+                       'extra/favicon.png': {'path': 'favicon.png'},
+                       }
