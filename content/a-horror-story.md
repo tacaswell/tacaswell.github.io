@@ -1,6 +1,6 @@
 Title: Why I am fanatical about version control
 Date: 2022-05-09 23:00
-Modified: 2022-05-09 23:51
+Modified: 2022-05-25 00:55
 Category: Software Development
 Tags: software, git
 Slug: how-i-learned-to-love-vcs
@@ -15,12 +15,12 @@ so years to [DVD-R](https://en.wikipedia.org/wiki/DVD%C2%B1R) for the lab
 archive.
 
 My [editor](https://www.gnu.org/software/emacs/) writes temporary backup copies
-while editing to the filename with a `~` appended.  Thus, for ever source file
-`foo.m` I had been working on there was a paired `foo.m~` in the directory as
-well.  At the time I was working in MATLAB and as was the convention had all
-off my source in one directory.  This was the code that I sued to generate the
-figures in my senior thesis and, more critically, the figures of [a paper we
-had in preparation](
+while editing to the filename with a `~` appended.  Thus, for every source file
+`foo.m` I had been working on there was a paired `foo.m~` in the directory.  At
+the time I was working in MATLAB and as was the convention had all off my
+source in one directory.  This was the code that I used to generate the figures
+in my senior thesis and -- more critically -- the figures of [a paper we had in
+preparation](
 https://www.sciencedirect.com/science/article/abs/pii/S0304399108003264) which
 would require further revision.  Not wanting to archive transitory and
 duplicate files I happily typed
