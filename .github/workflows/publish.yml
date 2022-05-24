@@ -17,7 +17,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Build
-        run: make html
+        run: make publish
 
       - name: Publish
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
