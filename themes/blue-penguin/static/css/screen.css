@@ -85,12 +85,19 @@ ol {
 
 h1, h2, h3, h4, h5, h6 {
     font-family: sans-serif;
-    font-weight: bold;
 }
+h1 {
+    font-size: 1.75em;
+    font-family: Inconsolata, monospace;
+}
+
 h1, h2, h3 {
-    font-size: 1.5em;
     line-height: 1em;
     margin: 1em 0;
+}
+
+h2, h3 {
+    font-size: 1.5em;
 }
 
 img, p, .post > .highlight, .highlighttable, h4, h5, h6 {
@@ -111,6 +118,7 @@ blockquote {
     font-size: 1.5em;
     line-height: 1em;
     margin: 0 20px 1em 0;
+    font-family: Inconsolata, monospace
 }
 
 .info {
@@ -157,6 +165,7 @@ blockquote {
 .highlight {
     border-radius: 3px;
 }
+
 .code > .highlight {
     border-radius: 0px 3px 3px 0px;
 }
@@ -202,8 +211,6 @@ sub {
 
 .post pre, .page pre {
     padding: .8em;
-    font-size: 12px;
-    font-family: Monospace;
     line-height: 1.1em;
     overflow: auto;
 }
@@ -236,6 +243,7 @@ nav ul {
     list-style: none;
     margin: 0 0 0 3em;
     padding: 0;
+    font-family: Inconsolata, monospace;
 }
 nav li {
     float: left;
@@ -259,11 +267,14 @@ header h1 {
     font-size: 1.5em;
     line-height: 1em;
     margin: 0;
+    font-family: Inconsolata, monospace;
+    font-weight: semi-bold
 }
 header h2 {
     font-size: 1em;
     margin: .3em 0;
     color: #666;
+    font-family: Inconsolata, monospace;
 }
 
 #content {
@@ -314,9 +325,9 @@ code {
     border-top-right-radius: 4px;
     box-sizing: border-box;
     color: #C7254E;
-    font-family: Hack,Monaco,Menlo,Consolas,"Courier New",monospace;
+    font-family: Inconsolata,Hack,Menlo,Consolas,monospace;
     font-size: inherit;
-    line-height: 18px;
+    line-height: 20px;
     padding-bottom: 2px;
     padding-right: 4px;
     padding-top: 2px;
