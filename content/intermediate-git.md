@@ -1,6 +1,6 @@
 Title: Think Like Git
-Date: 2022-05-24 18:00
-Modified: 2022-05-24 18:00
+Date: 2022-05-24 01:00
+Modified: 2022-05-24 01:00
 Category: Software Development
 Tags: software, git
 Slug: think-like-git
@@ -9,6 +9,7 @@ Summary: This article is for people who already know how to use `git` day-to-day
     want a deeper understand of the _why_ of `git` to do a better job reasoning
     about what should or should not be possible rather than just memorizing
     incantations.
+Status: published
 
 While this text is going to (mostly) refer to the `git` CLI because it is the
 lowest common denominator (everyone who uses `git` has access to the CLI), there
