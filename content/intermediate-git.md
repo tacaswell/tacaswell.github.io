@@ -5,12 +5,10 @@ Category: Software Design
 Tags: software, git
 Slug: think-like-git
 Authors: Thomas A Caswell
-Summary: Understanding how Git views the world for fun and profit
-
-This article is for people who already know how to use `git` day-to-day, but
-want a deeper understand of the _why_ of `git` to do a better job reasoning
-about what should or should not be possible rather than just memorizing
-incantations.
+Summary: This article is for people who already know how to use `git` day-to-day, but
+    want a deeper understand of the _why_ of `git` to do a better job reasoning
+    about what should or should not be possible rather than just memorizing
+    incantations.
 
 While this text is going to (mostly) refer to the git CLI because it is the
 lowest common denominator (everyone who uses git has access to the CLI!), there

@@ -11,8 +11,10 @@
 
 		{% if not articles_page %}
 		{% include "translations.html" %}
-		{% endif %}                
-                
+		{% endif %}
+                <div class="summary">
+                  {{ article.summary }}
+                </div>
 
                 {{ article.content }}
                 <div class="clear"></div>

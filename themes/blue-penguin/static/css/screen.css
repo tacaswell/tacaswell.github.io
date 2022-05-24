@@ -104,7 +104,7 @@ blockquote {
 }
 
 .date {
-    color: #CCC;
+    color: #666;
     float: left;
     clear: both;
     width: 130px;
@@ -123,7 +123,7 @@ blockquote {
     color: inherit;
 }
 .info a.tags {
-    background: #CCC;
+    background: #AAA;
     color: #FFF;
     display: inline-block;
     padding: 0 .3em;
@@ -211,7 +211,7 @@ sub {
 form.inline_edit {
     clear: both;
     margin: 4.5em 0;
-    background-color: #DDD;
+    background-color: #666;
     color: #000;
     padding: 20px;
     border-radius: 5px;
@@ -246,7 +246,6 @@ nav a {
 }
 nav a:hover {
     background-color: #d3d3d3;
-    color: #FFF;
 }
 nav li.selected a {
     background-color: #15A9DB;
@@ -264,7 +263,7 @@ header h1 {
 header h2 {
     font-size: 1em;
     margin: .3em 0;
-    color: #DDD;
+    color: #666;
 }
 
 #content {
@@ -315,8 +314,8 @@ code {
     border-top-right-radius: 4px;
     box-sizing: border-box;
     color: #C7254E;
-    font-family: Monaco,Menlo,Consolas,"Courier New",monospace;
-    font-size: 12.6px;
+    font-family: Hack,Monaco,Menlo,Consolas,"Courier New",monospace;
+    font-size: inherit;
     line-height: 18px;
     padding-bottom: 2px;
     padding-right: 4px;
@@ -338,3 +337,10 @@ footer p { margin: 0; }
 .right { float: right; }
 
 .clear { clear: both; }
+
+.summary{
+    font-size: 1.2em;
+    line-height: 1.6em;
+    padding-left: 1em;
+    border-left: #15A9DB solid 4px;
+}
