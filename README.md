@@ -8,4 +8,4 @@ The theme is base on [Blue Penguin](https://github.com/jody-frankowski/blue-peng
 
 The site is build with [Pelican](http://getpelican.com)
 
-Feedback is welcome, contributions are not.
+Feedback is welcome, contributed posts are not.
