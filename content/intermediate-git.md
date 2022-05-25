@@ -1,6 +1,6 @@
 Title: Think Like Git
 Date: 2022-05-24 01:00
-Modified: 2022-05-24 01:00
+Modified: 2022-05-24 22:35
 Category: Software Development
 Tags: software, git
 Slug: think-like-git
@@ -84,7 +84,7 @@ want to
 1. look at the whole graph of commits (`gitk`, `git log`)
 1. look at a commit (both the code content and meta-data) (`gitk`, `git switch`, `git checkout`)
 1. add commits (`git stage`, `git add`)
-3. discard changes (both local changes and whole commits) (`git reset`, `git checkout`, `git clean`)
+3. discard changes (both local changes and whole commits) (`git reset`, `git restore`, `git clean`, `git checkout`)
 3. change/move commits around the graph (`git rebase`, `git cherry-pick`)
 3. share your code (and history) with your friends (`git push`, `git fetch`, `git remote`, `git merge`)
 1. have more than one commit checked out at a time (`git worktree`)
@@ -380,6 +380,13 @@ same one we used to change branches)
 
 ```bash
 git checkout path/to/file  # discard local changes
+```
+
+There is also the new `git restore` [sub-command](https://git-scm.com/docs/git-restore)
+which is more tightly scoped to discarding local file changes
+
+```bash
+git restore path/to/file
 ```
 
 If you have files in your working directory that `git` is not currently tracking you
@@ -704,4 +711,4 @@ for this article include:
 
 Thank you to James Powell, Alex Held, Dora Caswell and the other beta-readers
 who read (or listened to) early drafts of this post and provided valuable
-feedback.
+feedback.  Thank you to Elliott Sales de Andrade for pointing out `git restore`.
