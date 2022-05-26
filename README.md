@@ -6,6 +6,6 @@ The content is [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/legalcode
 
 The theme is base on [Blue Penguin](https://github.com/jody-frankowski/blue-penguin)
 
-The site is build with [Pelican](http://getpelican.com)
+The site is built with [Pelican](http://getpelican.com)
 
 Feedback is welcome, contributed posts are not.
