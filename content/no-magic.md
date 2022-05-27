@@ -10,9 +10,9 @@ Status: published
 
 > "Any sufficiently advanced technology is indistinguishable from magic."
 >
-> Author C Clark
+> Arthur C Clark
 
-In the context of this well known Author C Clark quote, it is common to various
+In the context of this well known Arthur C Clark quote, it is common to various
 aspects of software called "magic". Slack has a sign-in workflow that they call
 ["magic link"](https://www.waveguide.io/examples/entry/passwordless-login/))
 and I will colloquially refer to command line methods as
@@ -57,7 +57,7 @@ Just like a good science challenge this is not going to be easy, but it must be
 
 **Reference**
 
-- [Art responding to the Author C Clark
+- [Art responding to the Arthur C Clark
   quote](https://lab.cccb.org/en/arthur-c-clarke-any-sufficiently-advanced-technology-is-indistinguishable-from-magic/)
   I am (obviously) not the first person to re-imagine and re-frame this quote.
 - FSF [Four Freedoms](https://fsfe.org/freesoftware/#freedoms) of open
