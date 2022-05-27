@@ -14,7 +14,7 @@ Status: published
 
 In the context of this well known Arthur C Clark quote, it is common to various
 aspects of software called "magic". Slack has a sign-in workflow that they call
-["magic link"](https://www.waveguide.io/examples/entry/passwordless-login/))
+["magic link"](https://www.waveguide.io/examples/entry/passwordless-login/)
 and I will colloquially refer to command line methods as
 ["incantations]({filename}intermediate-git.md).  However, [computers can be
 understood](https://blog.nelhage.com/post/computers-can-be-understood/).  This
