@@ -98,7 +98,7 @@ certain point of view, there is only one global history which consists of every
 commit any developer on any computer has ever created and any given computer
 only ever has a sub-graph of the full history.
 
-While technically pure, fully distributed collaboration is deeply impractical.
+While technically possible, pure, fully distributed collaboration is deeply impractical.
 Almost every project has socially picked a central repository to be considered
 the "cannonical" repository.  For example for Matplotlib
 [matplotlib/matplotlib](https://github/matplotlib/matplotlib) is _the_ ground
