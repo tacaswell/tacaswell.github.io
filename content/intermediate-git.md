@@ -100,7 +100,7 @@ only ever has a sub-graph of the full history.
 
 While technically pure, fully distributed collaboration is deeply impractical.
 Almost every project has socially picked a central repository to be considered
-the "cannonical" repository.  For example for Matplotlib
+the "canonical" repository.  For example for Matplotlib
 [matplotlib/matplotlib](https://github/matplotlib/matplotlib) is _the_ ground
 truth repository.  At the end of the day what _is_ Matplotlib the library is
 that git history, full stop.  Because of the special social role that
