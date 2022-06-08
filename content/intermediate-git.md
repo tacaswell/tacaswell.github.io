@@ -89,7 +89,7 @@ want to
 3. share your code (and history) with your friends (`git push`, `git fetch`, `git remote`, `git merge`)
 1. have more than one commit checked out at a time (`git worktree`)
 
-## What does in mean to be distributed (but centralized)?
+## What does it mean to be distributed (but centralized)?
 
 From a technical stand point no clone of a `git` repository is more special
 than any other.  Each contains a self consistent section of the history of the
@@ -101,7 +101,7 @@ only ever has a sub-graph of the full history.
 While technically pure, fully distributed collaboration is deeply impractical.
 Almost every project has socially picked a central repository to be considered
 the "canonical" repository.  For example for Matplotlib
-[matplotlib/matplotlib](https://github/matplotlib/matplotlib) is _the_ ground
+[matplotlib/matplotlib](https://github.com/matplotlib/matplotlib) is _the_ ground
 truth repository.  At the end of the day what _is_ Matplotlib the library is
 that git history, full stop.  Because of the special social role that
 repository holds only people with commit rights are able to push to that
