@@ -2,7 +2,7 @@ Title: No magic, only engineering
 Date: 2022-05-25 21:00
 Modified: 2022-05-25 21:00
 Category: Software Development
-Tags: software, community
+Tags: software
 Slug: no-magic-only-engineering
 Authors: Thomas A Caswell
 Summary: Computers are not magic, but there is some very slick engineering out there.
