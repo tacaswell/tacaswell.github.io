@@ -4,9 +4,11 @@ Modified: 2022-05-10 00:00
 Authors: Thomas A Caswell
 Status: published
 
+Thomas A Caswell (he/him)
 
 I am a soft-condensed matter physicist by training, but now work as a Research
-Software Engineer to enable scientist to use computers to do science via open source software.
+Software Engineer to enable scientist who use computers to do science via open
+source software.
 
 I am a [Computational Scientist at
 NSLS-II](https://www.bnl.gov/staff/tcaswell), the current Project Lead of
