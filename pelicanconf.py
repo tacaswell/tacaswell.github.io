@@ -83,6 +83,7 @@ MARKDOWN = {
         'markdown.extensions.toc': {
             # 'permalink': 'true',
         },
+        'pymdownx.tilde': {},
     },
     'output_format': 'html5'
 }
