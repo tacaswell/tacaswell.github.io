@@ -1,6 +1,6 @@
 Title: How this site is maintained and published
 Date: 2022-07-03 22:00
-Modified: 2022-07-03 22:00
+Modified: 2022-07-24 13:00
 Category: Navel Gazing
 Tags: hosting
 Slug: tech-details
@@ -57,7 +57,7 @@ like premature optimization.
 
 The theme is selected via the `PELICANOPTS=-t $(BASEDIR)/themes/blue-penguin`
 line in the
-[Mkaefile](https://github.com/tacaswell/tacaswell.github.io/blob/3e2507fdb3812f3c74cf3076a4e037a07e1c9b7f/Makefile#L10).
+[Makefile](https://github.com/tacaswell/tacaswell.github.io/blob/3e2507fdb3812f3c74cf3076a4e037a07e1c9b7f/Makefile#L10).
 
 **Build Pipeline**
 
