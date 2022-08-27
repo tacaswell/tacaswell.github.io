@@ -8,36 +8,43 @@ Authors: Thomas A Caswell
 Summary: Understanding co-routines with an object analog
 Status: draft
 
-Coroutines are one of the concepts in software development that is hard to
-explain in part because of the words and analogies we most frequently use.  In
-many ways the operation of a co-routine cuts directly against our intuition of
-how functions "should" work.  Going back to Dijkstra's [goto considered
+Co-routines are a concept that is hard to explain in part because the analogies
+and language we have in (modern) software development makes it near impossible
+to express.  Going back to Dijkstra's [goto considered
 harmful](https://homepages.cwi.nl/~storm/teaching/reader/Dijkstra68.pdf) essay
 we have been trained to think of functions as black boxes that have exactly one
-entry point and exactly one (external) exit point. Internal to the function
-there may be multiple `return` statements, but from the outside we can not
-tell.  However, there is always only one entry point no matter if you are
-"inside" or "outside".  It follows naturally that any internal state of a
-function (leaving aside global side-effects) can not survive from call-to-call
-(function scoped variables).  The intuition that you can not (and should not)
-know what is on the other side of a function call is deeply baked into how we
-think about software architecture and is at the core of why the functional
-paradigm can be beneficial.  On the other hand, a co-routine generalizes the
-concept of function to have _multiple_ entry points, _multiple_ exit points and
-the internal state of a co-routine _does_ survive between calls! This violates
-almost every expectation we have about how a function "should" behave and leaves
-us bereft of good analogies.
+entry point and exactly one (external) exit point.  In contrast co-routines,
+which have many entry and exit points, cut directly against our trained
+intuition of how functions (sub-routines) "should" work.
+
+
+Internal, a function may have `return` statements, but from the outside we can
+not tell but there is always only one entry point (the top) and any internal
+state of a function (leaving aside global side-effects) does not survive from
+call-to-call.  The intuition that you can not (and should not) know what is on
+the other side of a function call is deeply baked into how we think about
+software.
+
+On the other hand, a co-routine generalizes the concept of function to have
+_multiple_ entry points, _multiple_ exit points and the internal state of a
+co-routine _does_ survive between calls!
+
+This violates almost every expectation we have about how a function "should"
+behave and leaves us bereft of good analogies.
+
+
 
 Although I have been productively working with co-routines in Python (as
 generators, generator co-routines, and async co-routines) for about 7 years, I
 have only had a pragmatic understanding (I know the rules, can get them to do
 what I want) rather than a fundamental understanding of what and why they are.
-I recently had an ah-ha moment reading Knuth's description of them in [Vol
-1](NEED LINK).  He introduced the concept in the context of an Assembly
-language where there is not strict concept of a "function call", only
-sub-routines than know how to return to where they were called from when they
-finish.  This is a world where goto is not only not harmful, it is the only
-game in town!
+I recently had an ah-ha moment reading Knuth's description of them in [The Art
+of Computer Programming Vol
+1](https://www-cs-faculty.stanford.edu/~knuth/taocp.html).  He introduced the
+concept in the context of an Assembly language where there is not strict
+concept of a "function call", only sub-routines than know how to return to
+where they were called from when they finish.  This is a world where goto is
+not only not harmful, it is the only game in town!
 
 If we consider this proxcimily of an assembly program we can see that there is an
 infinite loop.
