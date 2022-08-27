@@ -15,6 +15,10 @@ NSLS-II](https://www.bnl.gov/staff/tcaswell), the current Project Lead of
 [Matplotlib](https://matplotlib.org), and a core contributor for
 [h5py](https://docs.h5py.org/en/stable/).
 
+I was named a [PSF fellow](https://www.python.org/psf/members/#fellows) in [Q2
+of
+2022](https://pyfound.blogspot.com/2022/07/announcing-python-software-foundation.html).
+
 This blog will cover Software Engineering, API design, and open source software &
 community.
 
