@@ -1,9 +1,9 @@
-Title: Corutines
+Title: Corutines (philosophical)
 Date: 2022-07-03 22:00
 Modified: 2022-07-03 22:00
 Category: Computer Science
 Tags: hosting
-Slug: coroutines-i
+Slug: coroutines-ii
 Authors: Thomas A Caswell
 Summary: Understanding co-routines with an object analog
 Status: draft
