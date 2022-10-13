@@ -1,2 +1,3 @@
 pelican[markdown]
 pymdown-extensions
+mdx-include
