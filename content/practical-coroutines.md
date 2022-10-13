@@ -1,8 +1,8 @@
 Title: Corutines (practical)
-Date: 2022-07-03 22:00
-Modified: 2022-07-03 22:00
+Date: 2022-10-13 22:00
+Modified: 2022-10-13 22:00
 Category: Computer Science
-Tags: hosting
+Tags: coroutines, python
 Slug: coroutines-i
 Authors: Thomas A Caswell
 Summary: So you have been handed a generator co-routine...
