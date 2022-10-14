@@ -1,12 +1,12 @@
 Title: Corutines (practical)
-Date: 2022-10-13 22:00
-Modified: 2022-10-13 22:00
+Date: 2022-10-14 17:25
+Modified: 2022-10-14 17:25
 Category: Computer Science
 Tags: coroutines, python
 Slug: coroutines-i
 Authors: Thomas A Caswell
 Summary: So you have been handed a generator co-routine...
-Status: draft
+Status: published
 
 
 This is a explanation of how to practically work with generator coroutines in
