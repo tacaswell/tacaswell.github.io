@@ -67,9 +67,10 @@ More explicitly, what `list` (or a `for` loop) is doing under the hood is:
 >>> g = my_gen()
 >>> next(g)
 'a'
->>>
 >>> next(g)
 'b'
+>>> next(g)
+'c'
 >>> next(g)
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
