@@ -209,9 +209,10 @@ It may be tempting to try and raise your own `StopIteration` rather than
 returning, however if you do Python will convert it to a `RuntimeError`.  This
 is because Python can not tell the difference between your intentionally
 raising `StopIteration` and something you have called unexpectedly raising
-`StopIteration`.  Pre Python [CHECK VERSION] the `StopIteration` would be
-raised to the outer caller which would be interpeted as the generator returning
-normally which in turn would mask bugs in very confusing ways.
+`StopIteration`.  Pre [Python 3.5](https://peps.python.org/pep-0479/) the
+`StopIteration` would be raised to the outer caller which would be interpreted
+as the generator returning normally which in turn would mask bugs in very
+confusing ways.
 
 ## `raise` / `throw` channel
 
