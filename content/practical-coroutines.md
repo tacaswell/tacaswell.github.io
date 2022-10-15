@@ -1,6 +1,6 @@
-Title: Corutines (practical)
+Title: Coroutines (practical)
 Date: 2022-10-14 17:25
-Modified: 2022-10-14 17:25
+Modified: 2022-10-15 11:15
 Category: Computer Science
 Tags: coroutines, python
 Slug: coroutines-i
