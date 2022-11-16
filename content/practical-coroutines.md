@@ -79,7 +79,7 @@ StopIteration
 
 The way that the generator communicates that it is exhausted is by raising the
 `StopIteration`
-[excecption](https://docs.python.org/3/library/exceptions.html#StopIteration).
+[exception](https://docs.python.org/3/library/exceptions.html#StopIteration).
 We will come back to the raised Exception object in a bit.
 
 Using `yield` we can get information _out_ of generator coroutine, to get data
@@ -125,7 +125,7 @@ The sequence is:
 2. The first `.send()` runs the coroutine up to the first `yield` and sends the
    right hand side out.  The value of the first `.send` _must_ be `None`
    because there is no way to access the value passed in.
-3. The coroutine is suspendend until the next `send()`.  The value pass to the
+3. The coroutine is suspended until the next `send()`.  The value pass to the
    second `send()` is assigned to the left hand side of the `yield` expression.
 4. The coroutine runs until the next `yield` and sends out the right hand side.  We
    then go back to step 3 until there are no more `yield` expressions in the coroutine.
