@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Casthoughts - Navel Gazing</title><link href="https://tacaswell.github.io/" rel="alternate"></link><link href="https://tacaswell.github.io/feeds/navel-gazing.atom.xml" rel="self"></link><id>https://tacaswell.github.io/</id><updated>2022-07-24T13:00:00-04:00</updated><subtitle>Software and such</subtitle><entry><title>How this site is maintained and published</title><link href="https://tacaswell.github.io/tech-details.html" rel="alternate"></link><published>2022-07-03T22:00:00-04:00</published><updated>2022-07-24T13:00:00-04:00</updated><author><name>Thomas A Caswell</name></author><id>tag:tacaswell.github.io,2022-07-03:/tech-details.html</id><summary type="html">&lt;p&gt;A good and proper navel gaze.&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;Hosting&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Both the &lt;a href="https://github.com/tacaswell/tacaswell.github.io"&gt;source&lt;/a&gt; and built
+artifacts for this site are hosted on GitHub (via &lt;a href="https://pages.github.com"&gt;github pages&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;It is possible to have a public gh-pages site with a private repository backing
+it, however I have opted to have both public.  This has the upsides that I can
+&lt;a href="https://github.com/tacaswell/tacaswell.github.io/pulls?q=is%3Apr+is%3Aclosed"&gt;get PRs from
+others&lt;/a&gt;
+and that it is easier for other people to adapt this set up for their own use.
+A slight downside is that the history of my edits is visible, including for
+draft posts.  I expect this to only be an issue if I write about any sensitive
+topics where I do not want to make my full writing process public (I&amp;rsquo;m all for
+openness and working in public, but even I have limits).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Framework&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;This site is written within the &lt;a href="http://getpelican.com"&gt;Pelican&lt;/a&gt; framework.&lt;/p&gt;
+&lt;p&gt;I did not do exhaustive research to pick Pelican (but it does well in a google
+search for &amp;ldquo;python static site generator&amp;rdquo;), however it is in Python (hopefully
+I won&amp;rsquo;t have to dig into the guts, but nice to know I can if I have/want to),
+generates static html (needed for gh-pages hosting), and supports both markdown
+and rst out-of-the-box.&lt;/p&gt;
+&lt;p&gt;The other framework I considered was
+&lt;a href="https://www.sphinx-doc.org/en/master/"&gt;Sphinx&lt;/a&gt;.  I work with Sphinx almost
+every day for writing documentation, so it is a tool I know.  However, I wanted
+both wanted to try a new tool and to use tool more tuned to blog
+out-of-the-box.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Theme&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;The theme is base on &lt;a href="https://github.com/jody-frankowski/blue-penguin"&gt;Blue
+Penguin&lt;/a&gt; which is licensed
+Public Domain.  Knowing that I was going to use GHA to build and publish the
+site, the theme is simply &lt;a href="https://github.com/tacaswell/tacaswell.github.io/tree/main/themes/blue-penguin"&gt;checked
+into&lt;/a&gt;
+the source.  I have modified a number of things, in particular the styling
+around code snippets, the base colors, and fonts (with considerable help from
+my wife).&lt;/p&gt;
+&lt;p&gt;If anyone else wants to use these modifications, I would be willing to split it
+off into its own repo (and use git submodules), but doing that up front seems
+like premature optimization.&lt;/p&gt;
+&lt;p&gt;The theme is selected via the &lt;code&gt;PELICANOPTS=-t $(BASEDIR)/themes/blue-penguin&lt;/code&gt;
+line in the
+&lt;a href="https://github.com/tacaswell/tacaswell.github.io/blob/3e2507fdb3812f3c74cf3076a4e037a07e1c9b7f/Makefile#L10"&gt;Makefile&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Build Pipeline&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;To publish the built artifacts, I use a &lt;a href="https://github.com/tacaswell/tacaswell.github.io/blob/main/.github/workflows/publish.yml"&gt;GHA
+workflow&lt;/a&gt;
+and the amazingly awesome &lt;a href="https://github.com/peaceiris/actions-gh-pages"&gt;gh-pages action&lt;/a&gt; from
+&lt;a href="https://github.com/peaceiris"&gt;peaciris&lt;/a&gt;.&lt;/p&gt;</content><category term="Navel Gazing"></category><category term="hosting"></category></entry></feed>

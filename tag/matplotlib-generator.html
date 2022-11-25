@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Casthoughts | articles tagged "Matplotlib generator"</title>
+    <link rel="shortcut icon" type="image/png" href="https://tacaswell.github.io/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="https://tacaswell.github.io/favicon.ico">
+    <link href="https://tacaswell.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Casthoughts Full Atom Feed" />
+    <link rel="stylesheet" href="https://tacaswell.github.io/theme/css/screen.css" type="text/css" />
+    <link rel="stylesheet" href="https://tacaswell.github.io/theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="https://tacaswell.github.io/theme/css/print.css" type="text/css" media="print" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600&display=swap" rel="stylesheet">
+    <meta name="generator" content="Pelican" />
+    <meta name="description" content="Blog of Thomas A Caswell" />
+    <meta name="author" content="Thomas A Caswell" />
+
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li class="ephemeral selected"><a href="https://tacaswell.github.io/tag/matplotlib-generator.html">Matplotlib generator</a></li>
+                <li><a href="https://tacaswell.github.io/">Home</a></li>
+                <li><a href="https://tacaswell.github.io/pages/about.html">About</a></li>
+                <li><a href="https://tacaswell.github.io/tags">Tags</a></li>
+                <li><a href="https://tacaswell.github.io/categories">Categories</a></li>
+                <li><a href="https://tacaswell.github.io/archives">Archives</a></li>
+            </ul>
+        </nav>
+        <div class="header_box">
+            <h1><a href="https://tacaswell.github.io/">Casthoughts</a></h1>
+            <h2>Software and such</h2>
+        </div>
+    </header>
+    <div id="wrapper">
+        <div id="content">            <h4 class="date">Nov 25, 2022</h4>
+
+            <article class="post">
+                <h1 class="title">
+                    <a href="https://tacaswell.github.io/dynamic-axes-count.html" rel="bookmark" title="Permanent Link to &quot;Reflowing Axes&quot;">Reflowing Axes</a>
+                </h1>
+
+                <div class="summary">
+                  <p>Dynamically adding Axes to a Figure</p>
+                </div>
+
+                <p>At the prompting of a user on Matplotlib&rsquo;s gitter channel I wrote the following
+example:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">count</span>
+<span class="kn">from</span> <span class="nn">matplotlib.gridspec</span> <span class="kn">import</span> <span class="n">GridSpec</span>
+
+
+<span class="k">def</span> <span class="nf">reflow_gen</span><span class="p">(</span><span class="n">fig</span><span class="p">):</span>
+    <span class="c1"># we own this figure now so clear it</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span>
+    <span class="c1"># running count of the number of axes</span>
+    <span class="n">axcount</span> <span class="o">=</span> <span class="n">count</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># the shape of the grid</span>
+    <span class="n">row_guess</span> <span class="o">=</span> <span class="n">col_guess</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1"># the current GridSpec object</span>
+    <span class="n">gs</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1"># we are a generator, so loop forever</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="c1"># what number is this Axes?</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">axcount</span><span class="p">)</span>
+        <span class="c1"># do we need to re-flow?</span>
+        <span class="k">if</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="n">row_guess</span> <span class="o">*</span> <span class="n">col_guess</span><span class="p">:</span>
+            <span class="c1"># Find the smallest square that will work</span>
+            <span class="n">col_guess</span> <span class="o">=</span> <span class="n">row_guess</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">j</span><span class="p">)))</span>
+            <span class="c1"># and then drop fully empty rows</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">row_guess</span><span class="p">):</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">row_guess</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">col_guess</span> <span class="o">&lt;</span> <span class="n">j</span><span class="p">:</span>
+                    <span class="k">break</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">row_guess</span> <span class="o">-=</span> <span class="mi">1</span>
+
+            <span class="c1"># Create the new gridspec object</span>
+            <span class="n">gs</span> <span class="o">=</span> <span class="n">GridSpec</span><span class="p">(</span><span class="n">row_guess</span><span class="p">,</span> <span class="n">col_guess</span><span class="p">,</span> <span class="n">figure</span><span class="o">=</span><span class="n">fig</span><span class="p">)</span>
+
+            <span class="c1"># for each of the axes, adjust it to use the new gridspec</span>
+            <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">fig</span><span class="o">.</span><span class="n">axes</span><span class="p">):</span>
+                <span class="n">ax</span><span class="o">.</span><span class="n">set_subplotspec</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">unravel_index</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="p">(</span><span class="n">row_guess</span><span class="p">,</span> <span class="n">col_guess</span><span class="p">))])</span>
+            <span class="c1"># resize the figure to have ~ 3:4 ratio and keep the Axes fixed</span>
+            <span class="n">fig</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">(</span><span class="n">col_guess</span> <span class="o">*</span> <span class="mi">4</span><span class="p">,</span> <span class="n">row_guess</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span>
+
+        <span class="c1"># Add the new axes to the Figure at the next open space</span>
+        <span class="n">new_ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">unravel_index</span><span class="p">(</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="n">row_guess</span><span class="p">,</span> <span class="n">col_guess</span><span class="p">))])</span>
+
+        <span class="c1"># hand the Axes back to the user</span>
+        <span class="k">yield</span> <span class="n">new_ax</span>
+
+<span class="c1"># make a Figure</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">layout</span><span class="o">=</span><span class="s1">&#39;constrained&#39;</span><span class="p">)</span>
+<span class="c1"># set up the generator</span>
+<span class="n">ax_gen</span> <span class="o">=</span> <span class="n">reflow_gen</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="c1"># get an Axes</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">ax_gen</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Axes </span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="c1"># fig.savefig(f&#39;dynamic_axes_figs-axes_{j}.svg&#39;)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+
+<p><strong>1 axes (1x1)</strong></p>
+<p><img alt="Figure with 1 Axes added" src="/images/dynamic_axes_figs-axes_0.svg" title="1 Axes"></p>
+<p><strong>2 axes (2x1)</strong></p>
+<p><img alt="Figure with 2 Axes added" src="/images/dynamic_axes_figs-axes_1.svg" title="2 Axes"></p>
+<p><strong>3 axes (2x2)</strong></p>
+<p><img alt="Figure with 3 Axes added" src="/images/dynamic_axes_figs-axes_2.svg" title="3 Axes"></p>
+<p><strong>4 axes (2x2)</strong></p>
+<p><img alt="Figure with 4 Axes added" src="/images/dynamic_axes_figs-axes_3.svg" title="4 Axes"></p>
+<p><strong>5 axes (3x2)</strong></p>
+<p><img alt="Figure with 5 Axes added" src="/images/dynamic_axes_figs-axes_4.svg" title="5 Axes"></p>
+<p>and so on up to as many <em>Axes</em> as you want to add.  Note that the Figure is
+getting bigger as more Axes are added so if using this interactively the window
+will grow.</p>
+<p>I am not sure that this is general enough to add to Matplotlib, but it is a
+cute example of how generators can be useful.  One concern with this code is
+that the generator will keep the <em>Figure</em> object alive which may complicate
+resource management.  There are also some questions for me about what the API
+should be.  As written the resizing and target aspect ratio behavior is fixed,
+I think it is reasonable for users to be able to control both.  Additional, the
+scheme for growing the grid and selecting which slots to fill at a given grid
+size and fill factor could be elaborated.  It might also be interesting to
+promote the generator to a full <a href="https://tacaswell.github.io/coroutines-i.html">generator
+co-routine</a> to be able to pass arguments the Axes
+creation step (to set projections and such).</p>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="https://tacaswell.github.io/dynamic-axes-count.html">posted at 22:00</a>
+                    &nbsp;&middot;&nbsp;<a href="https://tacaswell.github.io/category/matplotlib.html" rel="tag">Matplotlib</a>
+                    &nbsp;&middot;
+                    &nbsp;<a href="https://tacaswell.github.io/tag/matplotlib-generator.html" class="tags selected">Matplotlib generator</a>
+                </div>
+            </article>
+
+            <div class="clear"></div>
+            <footer>
+                <p>
+                  ©2022- Caswell <a href="https://tacaswell.github.io/pages/license.html" rel="alternate">CC-BY-4.0</a>
+                                  &middot;
+                  Source on <a href="https://github.com/tacaswell/tacaswell.github.io">GitHub</a>
+                &middot;
+                <a href="https://tacaswell.github.io/feeds/all.atom.xml" rel="alternate">Atom Feed</a>
+                  <br/>
+                  <a rel="me" href="https://fosstodon.org/@tacaswell">@tacaswell@fosstodon.org</a>
+                  &middot;
+                  <a href="mailto:tcaswell@gmail.com?subject=Blog feedback">tcaswell@gmail.com</a>
+                </p>
+            </footer>
+        </div>
+        <div class="clear"></div>
+    </div>
+</body>
+</html>

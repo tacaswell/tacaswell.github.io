@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Casthoughts | articles tagged "hosting"</title>
+    <link rel="shortcut icon" type="image/png" href="https://tacaswell.github.io/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="https://tacaswell.github.io/favicon.ico">
+    <link href="https://tacaswell.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Casthoughts Full Atom Feed" />
+    <link rel="stylesheet" href="https://tacaswell.github.io/theme/css/screen.css" type="text/css" />
+    <link rel="stylesheet" href="https://tacaswell.github.io/theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="https://tacaswell.github.io/theme/css/print.css" type="text/css" media="print" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600&display=swap" rel="stylesheet">
+    <meta name="generator" content="Pelican" />
+    <meta name="description" content="Blog of Thomas A Caswell" />
+    <meta name="author" content="Thomas A Caswell" />
+
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li class="ephemeral selected"><a href="https://tacaswell.github.io/tag/hosting.html">hosting</a></li>
+                <li><a href="https://tacaswell.github.io/">Home</a></li>
+                <li><a href="https://tacaswell.github.io/pages/about.html">About</a></li>
+                <li><a href="https://tacaswell.github.io/tags">Tags</a></li>
+                <li><a href="https://tacaswell.github.io/categories">Categories</a></li>
+                <li><a href="https://tacaswell.github.io/archives">Archives</a></li>
+            </ul>
+        </nav>
+        <div class="header_box">
+            <h1><a href="https://tacaswell.github.io/">Casthoughts</a></h1>
+            <h2>Software and such</h2>
+        </div>
+    </header>
+    <div id="wrapper">
+        <div id="content">            <h4 class="date">Jul 03, 2022</h4>
+
+            <article class="post">
+                <h1 class="title">
+                    <a href="https://tacaswell.github.io/tech-details.html" rel="bookmark" title="Permanent Link to &quot;How this site is maintained and published&quot;">How this site is maintained and published</a>
+                </h1>
+
+                <div class="summary">
+                  <p>A good and proper navel gaze.</p>
+                </div>
+
+                <p><strong>Hosting</strong></p>
+<p>Both the <a href="https://github.com/tacaswell/tacaswell.github.io">source</a> and built
+artifacts for this site are hosted on GitHub (via <a href="https://pages.github.com">github pages</a>).</p>
+<p>It is possible to have a public gh-pages site with a private repository backing
+it, however I have opted to have both public.  This has the upsides that I can
+<a href="https://github.com/tacaswell/tacaswell.github.io/pulls?q=is%3Apr+is%3Aclosed">get PRs from
+others</a>
+and that it is easier for other people to adapt this set up for their own use.
+A slight downside is that the history of my edits is visible, including for
+draft posts.  I expect this to only be an issue if I write about any sensitive
+topics where I do not want to make my full writing process public (I&rsquo;m all for
+openness and working in public, but even I have limits).</p>
+<p><strong>Framework</strong></p>
+<p>This site is written within the <a href="http://getpelican.com">Pelican</a> framework.</p>
+<p>I did not do exhaustive research to pick Pelican (but it does well in a google
+search for &ldquo;python static site generator&rdquo;), however it is in Python (hopefully
+I won&rsquo;t have to dig into the guts, but nice to know I can if I have/want to),
+generates static html (needed for gh-pages hosting), and supports both markdown
+and rst out-of-the-box.</p>
+<p>The other framework I considered was
+<a href="https://www.sphinx-doc.org/en/master/">Sphinx</a>.  I work with Sphinx almost
+every day for writing documentation, so it is a tool I know.  However, I wanted
+both wanted to try a new tool and to use tool more tuned to blog
+out-of-the-box.</p>
+<p><strong>Theme</strong></p>
+<p>The theme is base on <a href="https://github.com/jody-frankowski/blue-penguin">Blue
+Penguin</a> which is licensed
+Public Domain.  Knowing that I was going to use GHA to build and publish the
+site, the theme is simply <a href="https://github.com/tacaswell/tacaswell.github.io/tree/main/themes/blue-penguin">checked
+into</a>
+the source.  I have modified a number of things, in particular the styling
+around code snippets, the base colors, and fonts (with considerable help from
+my wife).</p>
+<p>If anyone else wants to use these modifications, I would be willing to split it
+off into its own repo (and use git submodules), but doing that up front seems
+like premature optimization.</p>
+<p>The theme is selected via the <code>PELICANOPTS=-t $(BASEDIR)/themes/blue-penguin</code>
+line in the
+<a href="https://github.com/tacaswell/tacaswell.github.io/blob/3e2507fdb3812f3c74cf3076a4e037a07e1c9b7f/Makefile#L10">Makefile</a>.</p>
+<p><strong>Build Pipeline</strong></p>
+<p>To publish the built artifacts, I use a <a href="https://github.com/tacaswell/tacaswell.github.io/blob/main/.github/workflows/publish.yml">GHA
+workflow</a>
+and the amazingly awesome <a href="https://github.com/peaceiris/actions-gh-pages">gh-pages action</a> from
+<a href="https://github.com/peaceiris">peaciris</a>.</p>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="https://tacaswell.github.io/tech-details.html">posted at 22:00</a>
+                    &nbsp;&middot;&nbsp;<a href="https://tacaswell.github.io/category/navel-gazing.html" rel="tag">Navel Gazing</a>
+                    &nbsp;&middot;
+                    &nbsp;<a href="https://tacaswell.github.io/tag/hosting.html" class="tags selected">hosting</a>
+                </div>
+            </article>
+
+            <div class="clear"></div>
+            <footer>
+                <p>
+                  ©2022- Caswell <a href="https://tacaswell.github.io/pages/license.html" rel="alternate">CC-BY-4.0</a>
+                                  &middot;
+                  Source on <a href="https://github.com/tacaswell/tacaswell.github.io">GitHub</a>
+                &middot;
+                <a href="https://tacaswell.github.io/feeds/all.atom.xml" rel="alternate">Atom Feed</a>
+                  <br/>
+                  <a rel="me" href="https://fosstodon.org/@tacaswell">@tacaswell@fosstodon.org</a>
+                  &middot;
+                  <a href="mailto:tcaswell@gmail.com?subject=Blog feedback">tcaswell@gmail.com</a>
+                </p>
+            </footer>
+        </div>
+        <div class="clear"></div>
+    </div>
+</body>
+</html>
